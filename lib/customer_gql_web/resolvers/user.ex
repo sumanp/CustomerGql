@@ -2,7 +2,7 @@ defmodule CustomerGqlWeb.Resolvers.User do
   alias CustomerGqlWeb.User
   alias CustomerGql.Accounts
 
-  def all(params, _), do: {:ok, Accounts.list_users()}
+  def all(params, _), do: {:ok, Accounts.list_users(params)}
 
   def find(%{id: id}, _) do
     id = String.to_integer(id)
