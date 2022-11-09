@@ -1,6 +1,7 @@
 defmodule CustomerGql.Accounts do
   alias CustomerGql.Repo
   alias CustomerGql.Accounts.User
+  alias CustomerGql.Accounts.Preference
   alias EctoShorts.Actions
 
   def list_users(params \\ %{}) do
@@ -17,5 +18,9 @@ defmodule CustomerGql.Accounts do
 
   def create_user(params) do
     Actions.create(User, params)
+  end
+
+  def update_preference(id, params) do
+    Actions.update(Preference, id, params)
   end
 end
