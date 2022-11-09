@@ -22,6 +22,10 @@ config :customer_gql, CustomerGqlWeb.Endpoint,
   pubsub_server: CustomerGql.PubSub,
   live_view: [signing_salt: "joWtGGTG"]
 
+config :ecto_shorts,
+  repo: CustomerGql.Repo,
+  error_module: EctoShorts.Actions.Error
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

@@ -3,13 +3,13 @@ defmodule CustomerGqlWeb.Schemas.Mutations.Preference do
   alias CustomerGqlWeb.Resolvers
 
   object :preference_mutations do
-    field :update_user_preferences, :preferences do
-      arg :user_id, non_null(:id)
-      arg :likes_emails, :boolean
-      arg :likes_phone_calls, :boolean
-      arg :likes_faxes, :boolean
+    field :update_user_preferences, :preference do
+      arg(:user_id, non_null(:id))
+      arg(:likes_emails, :boolean)
+      arg(:likes_phone_calls, :boolean)
+      arg(:likes_faxes, :boolean)
 
-      resolve &Resolvers.Preference.update/2
+      resolve(&Resolvers.Preference.update/2)
     end
   end
 end

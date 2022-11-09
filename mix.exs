@@ -45,7 +45,9 @@ defmodule CustomerGql.MixProject do
       {:absinthe_plug, "~> 1.5"},
       {:absinthe_phoenix, "~> 2.0"},
       {:ecto_sql, "~> 3.0"},
-      {:postgrex, "~> 0.15"}
+      {:postgrex, "~> 0.15"},
+      {:ecto_shorts, "~> 2.2"},
+      {:dataloader, "~> 1.0"}
     ]
   end
 

@@ -14,10 +14,10 @@ defmodule CustomerGql.Application do
       {Phoenix.PubSub, name: CustomerGql.PubSub},
       # Start the Endpoint (http/https)
       CustomerGqlWeb.Endpoint,
-      CustomerGql.Repo,
       # Start a worker by calling: CustomerGql.Worker.start_link(arg)
       # {CustomerGql.Worker, arg}
-      {Absinthe.Subscription, [CustomerGqlWeb.Endpoint]}
+      {Absinthe.Subscription, [CustomerGqlWeb.Endpoint]},
+      CustomerGql.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

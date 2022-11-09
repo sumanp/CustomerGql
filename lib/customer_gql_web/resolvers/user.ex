@@ -1,24 +1,23 @@
 defmodule CustomerGqlWeb.Resolvers.User do
   alias CustomerGqlWeb.User
+  alias CustomerGql.Accounts
 
-  def all(params, _), do: User.all(params)
+  def all(params, _), do: {:ok, Accounts.list_users()}
 
   def find(%{id: id}, _) do
     id = String.to_integer(id)
 
-    User.find(%{id: id})
+    Accounts.find_user(%{id: id})
   end
 
   def update(%{id: id} = params, _) do
     id = String.to_integer(id)
 
-    User.update(id, Map.delete(params, :id))
+    Accounts.update_user(id, Map.delete(params, :id))
   end
 
-  def create(%{id: id} = params, _) do
-    id = String.to_integer(id)
-
-    with {:ok, user} <- User.create(Map.put(params, :id, id)) do
+  def create(params, _) do
+    with {:ok, user} <- Accounts.create_user(params) do
       {:ok, user}
     else
       error -> error
