@@ -4,15 +4,11 @@ defmodule CustomerGqlWeb.Resolvers.User do
   def all(params, _), do: {:ok, Accounts.list_users(params)}
 
   def find(%{id: id}, _) do
-    id = String.to_integer(id)
-
     Accounts.find_user(%{id: id})
   end
 
   def update(%{id: id} = params, _) do
-    id = String.to_integer(id)
-
-    Accounts.update_user(id, Map.delete(params, :id))
+    Accounts.update_user(id, params)
   end
 
   def create(params, _) do

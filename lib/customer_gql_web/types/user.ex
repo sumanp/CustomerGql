@@ -4,12 +4,14 @@ defmodule CustomerGqlWeb.Types.User do
   import Absinthe.Resolution.Helpers, only: [dataloader: 2]
 
   input_object :preferences_input do
+    field(:id, :id)
     field(:likes_emails, :boolean)
     field(:likes_phone_calls, :boolean)
     field(:likes_faxes, :boolean)
   end
 
   object :user_preferences do
+    field(:id, :id)
     field(:likes_emails, :boolean)
     field(:likes_phone_calls, :boolean)
     field(:likes_faxes, :boolean)
