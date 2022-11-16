@@ -1,4 +1,5 @@
 locals_without_parens = [
+  # Absinthe
   mutation: 2,
   query: 2,
   subscription: 2,
@@ -53,7 +54,40 @@ locals_without_parens = [
   union: 3,
   value: 1,
   value: 2,
-  values: 1
+  values: 1,
+
+# Phoenix
+  plug: :*,
+  action_fallback: :*,
+  render: :*,
+  redirect: :*,
+  socket: :*,
+  get: :*,
+  post: :*,
+  put: :*,
+  resources: :*,
+  pipe_through: :*,
+  delete: :*,
+  forward: :*,
+  channel: :*,
+  transport: :*,
+
+  # Ecto Schema
+  field: :*,
+  belongs_to: :*,
+  has_one: :*,
+  has_many: :*,
+  embeds_one: :*,
+  embeds_many: :*,
+  many_to_many: :*,
+  add: :*,
+
+  # Ecto Query
+  from: :*,
+
+  # Ecto Migration
+  create: :*,
+  modify: :*,
 ]
 
 [

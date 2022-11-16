@@ -5,10 +5,10 @@ defmodule CustomerGql.Accounts.User do
   alias CustomerGql.Repo
 
   schema "users" do
-    field(:email, :string)
-    field(:name, :string)
+    field :email, :string
+    field :name, :string
 
-    has_one(:preference, CustomerGql.Accounts.Preference)
+    has_one :preference, CustomerGql.Accounts.Preference
   end
 
   @available_params [:name, :email]
