@@ -3,10 +3,10 @@ defmodule CustomerGqlWeb.Types.Preference do
 
   @desc "User preferences"
   object :preference do
-    field(:user_id, non_null(:id))
-    field(:id, non_null(:id))
-    field(:likes_emails, :boolean)
-    field(:likes_phone_calls, :boolean)
-    field(:likes_faxes, :boolean)
+    field :user_id, non_null(:id)
+    field :id, non_null(:id)
+    field :likes_emails, :boolean
+    field :likes_phone_calls, :boolean
+    field :likes_faxes, :boolean
   end
 end

@@ -3,7 +3,7 @@ defmodule CustomerGqlWeb.Schemas.Subscriptions.Preference do
 
   object :preference_subscriptions do
     field :updated_user_preferences, :preference do
-      arg(:user_id, non_null(:id))
+      arg :user_id, non_null(:id)
 
       trigger(:update_user_preferences,
         topic: fn preferences ->
