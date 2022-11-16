@@ -10,7 +10,7 @@ defmodule CustomerGqlWeb.Schemas.Mutations.Preference do
       arg :likes_phone_calls, :boolean
       arg :likes_faxes, :boolean
 
-      resolve(&Resolvers.Preference.update/2)
+      resolve &Resolvers.Preference.update/2
     end
   end
 end

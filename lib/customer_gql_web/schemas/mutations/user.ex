@@ -9,7 +9,7 @@ defmodule CustomerGqlWeb.Schemas.Mutations.User do
       arg :email, :string
       arg :preference, :preferences_input
 
-      resolve(&Resolvers.User.update/2)
+      resolve &Resolvers.User.update/2
     end
 
     field :create_user, :user do
@@ -17,7 +17,7 @@ defmodule CustomerGqlWeb.Schemas.Mutations.User do
       arg :email, :string
       arg :preference, :preferences_input
 
-      resolve(&Resolvers.User.create/2)
+      resolve &Resolvers.User.create/2
     end
   end
 end
