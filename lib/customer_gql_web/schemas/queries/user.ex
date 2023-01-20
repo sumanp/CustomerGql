@@ -10,7 +10,7 @@ defmodule CustomerGqlWeb.Schemas.Queries.User do
     end
 
     field :users, list_of(:user) do
-      arg :preferences, :preferences_input
+      arg :preference, :preferences_input
       arg :before, :integer
       arg :after, :integer
       arg :first, :integer

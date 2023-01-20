@@ -3,25 +3,15 @@ defmodule CustomerGql.Accounts do
   alias CustomerGql.Accounts.User
   alias CustomerGql.Accounts.Preference
   alias EctoShorts.Actions
+  import Ecto.Query
 
   def list_users(params \\ %{}) do
-    pref_filter = Map.get(params, :preferences, %{})
-    pref_keys = Map.keys(pref_filter)
+    query =
+      User
+      |> join(:inner, [u], assoc(u, :preference), as: :preference)
+      |> where(^filter_where(Map.get(params, :preferences, %{})))
 
-    users = Actions.all(User, Map.put(params, :preload, [:preference]))
-
-    Enum.reduce(users, [], fn %{preference: preference} = user, acc ->
-      user_preference =
-        preference
-        |> Map.from_struct()
-        |> Map.take(pref_keys)
-
-      if Map.equal?(pref_filter, user_preference) do
-        [user | acc]
-      else
-        acc
-      end
-    end)
+    Actions.all(query, Map.put(params, :preload, [:preference]))
   end
 
   def find_user(params) do
@@ -38,5 +28,21 @@ defmodule CustomerGql.Accounts do
 
   def update_preference(id, params) do
     Actions.update(Preference, id, params)
+  end
+
+  def filter_where(params) do
+    Enum.reduce(params, dynamic(true), fn
+      {"likes_emails", value}, dynamic ->
+        dynamic([preference: p], ^dynamic and p.likes_emails == ^value)
+
+      {"likes_phonecalls", value}, dynamic ->
+        dynamic([preference: p], ^dynamic and p.likes_phonecalls == ^value)
+
+      {"likes_faxes", value}, dynamic ->
+        dynamic([preference: p], ^dynamic and p.likes_faxes == ^value)
+
+      {_, _}, dynamic ->
+        dynamic
+    end)
   end
 end
