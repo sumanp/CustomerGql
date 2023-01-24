@@ -12,9 +12,6 @@ defmodule CustomerGqlWeb.Resolvers.User do
   end
 
   def create(params, _) do
-    case Accounts.create_user(params) do
-      {:ok, user} -> {:ok, user}
-      error -> error
-    end
+    Accounts.create_user(params)
   end
 end
