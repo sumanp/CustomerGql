@@ -10,19 +10,12 @@ defmodule CustomerGqlWeb.Types.User do
     field :likes_faxes, :boolean
   end
 
-  object :user_preferences do
-    field :id, :id
-    field :likes_emails, :boolean
-    field :likes_phone_calls, :boolean
-    field :likes_faxes, :boolean
-  end
-
   @desc "User with preferences"
   object :user do
     field :id, :id
     field :name, :string
     field :email, :string
 
-    field :preference, :user_preferences, resolve: dataloader(CustomerGql.Accounts, :preference)
+    field :preference, :preference, resolve: dataloader(CustomerGql.Accounts, :preference)
   end
 end

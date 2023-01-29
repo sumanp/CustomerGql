@@ -5,12 +5,10 @@ defmodule CustomerGql.Accounts do
   import Ecto.Query
 
   def list_users(params \\ %{}) do
-    query =
-      User
-      |> join(:inner, [u], assoc(u, :preference), as: :preference)
-      |> where(^User.filter_where(Map.get(params, :preferences, %{})))
-
-    Actions.all(query, Map.put(params, :preload, [:preference]))
+    Actions.all(
+      User.filter_by_preference(Map.get(params, :preferences, %{})),
+      Map.put(params, :preload, [:preference])
+    )
   end
 
   def find_user(params) do
