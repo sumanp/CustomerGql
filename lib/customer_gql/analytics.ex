@@ -32,4 +32,8 @@ defmodule CustomerGql.Analytics do
     new_state = Map.merge(state, %{event => state[event] + 1})
     {:noreply, new_state}
   end
+
+  def handle_info(_, state) do
+    {:noreply, state}
+  end
 end

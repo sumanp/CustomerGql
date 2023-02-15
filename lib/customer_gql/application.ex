@@ -8,8 +8,6 @@ defmodule CustomerGql.Application do
 
   @impl true
   def start(_type, _args) do
-    analytics_workers = Enum.map(@events, &{CustomerGql.Analytics, &1})
-
     children = [
       # Start the Telemetry supervisor
       CustomerGqlWeb.Telemetry,
