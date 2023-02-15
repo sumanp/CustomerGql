@@ -3,7 +3,9 @@ defmodule CustomerGqlWeb.Schema do
 
   import_types CustomerGqlWeb.Types.User
   import_types CustomerGqlWeb.Types.Preference
+  import_types CustomerGqlWeb.Types.Analytics
   import_types CustomerGqlWeb.Schemas.Queries.User
+  import_types CustomerGqlWeb.Schemas.Queries.Analytics
   import_types CustomerGqlWeb.Schemas.Mutations.User
   import_types CustomerGqlWeb.Schemas.Mutations.Preference
   import_types CustomerGqlWeb.Schemas.Subscriptions.User
@@ -11,6 +13,7 @@ defmodule CustomerGqlWeb.Schema do
 
   query do
     import_fields :user_queries
+    import_fields :resolver_queries
   end
 
   mutation do
@@ -31,6 +34,15 @@ defmodule CustomerGqlWeb.Schema do
   end
 
   def plugins do
-    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
+    [Absinthe.Middleware.Dataloader] ++
+      Absinthe.Plugin.defaults()
+  end
+
+  def middleware(middleware, _field, obj) do
+    if obj.identifier in [:query, :subscription, :mutation] do
+      [CustomerGql.Middlewares.Analytics | middleware]
+    else
+      middleware
+    end
   end
 end
