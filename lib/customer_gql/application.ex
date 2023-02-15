@@ -4,9 +4,12 @@ defmodule CustomerGql.Application do
   @moduledoc false
 
   use Application
+  @events [:create_user, :update_user, :get_user, :users, :update_user_preferences]
 
   @impl true
   def start(_type, _args) do
+    analytics_workers = Enum.map(@events, &{CustomerGql.Analytics, &1})
+
     children = [
       # Start the Telemetry supervisor
       CustomerGqlWeb.Telemetry,
@@ -17,7 +20,8 @@ defmodule CustomerGql.Application do
       # Start a worker by calling: CustomerGql.Worker.start_link(arg)
       # {CustomerGql.Worker, arg}
       {Absinthe.Subscription, [CustomerGqlWeb.Endpoint]},
-      CustomerGql.Repo
+      CustomerGql.Repo,
+      {CustomerGql.Analytics, @events}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
