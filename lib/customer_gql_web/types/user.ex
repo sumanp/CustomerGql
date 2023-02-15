@@ -3,7 +3,7 @@ defmodule CustomerGqlWeb.Types.User do
 
   import Absinthe.Resolution.Helpers, only: [dataloader: 2]
 
-  input_object :preferences_input do
+  input_object :preference_input do
     field :id, :id
     field :likes_emails, :boolean
     field :likes_phone_calls, :boolean

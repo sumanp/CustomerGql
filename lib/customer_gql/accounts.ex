@@ -15,6 +15,13 @@ defmodule CustomerGql.Accounts do
     Actions.find(User, params)
   end
 
+  def find_resolver_hit(params) do
+    event = params[:key] |> String.to_existing_atom()
+    counter = CustomerGql.Analytics.get_event_counter(event)
+
+    {:ok, %{key: event, count: counter}}
+  end
+
   def update_user(id, params) do
     Actions.update(User, id, params)
   end
