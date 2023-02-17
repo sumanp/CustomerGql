@@ -3,13 +3,13 @@ defmodule CustomerGql.SubscriptionCase do
 
   using do
     quote do
-      use CustomerGql.ChannelCase
+      use CustomerGqlWeb.ChannelCase
 
       use Absinthe.Phoenix.SubscriptionTest,
         schema: CustomerGqlWeb.Schema
 
       setup do
-        {:ok, socket} = Phoneix.ChannelTest.connect(CustomerGql.Socket, %{})
+        {:ok, socket} = Phoenix.ChannelTest.connect(CustomerGqlWeb.UserSocket, %{})
         {:ok, socket} = Absinthe.Phoenix.SubscriptionTest.join_absinthe(socket)
 
         {:ok, %{socket: socket}}
