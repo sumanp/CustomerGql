@@ -16,7 +16,7 @@ defmodule CustomerGql.Accounts do
   end
 
   def find_resolver_hit(params) do
-    event =  String.to_existing_atom(params[:key])
+    event = String.to_existing_atom(params[:key])
     counter = CustomerGql.Analytics.get_event_counter(event)
 
     {:ok, %{key: event, count: counter}}
