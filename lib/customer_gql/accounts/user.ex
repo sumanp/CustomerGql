@@ -27,6 +27,7 @@ defmodule CustomerGql.Accounts.User do
   def filter_by_preference(pref_params) do
     User
     |> join(:inner, [u], assoc(u, :preference), as: :preference)
+    |> preload([preference: p], preference: p)
     |> where(^filter_where(pref_params))
   end
 
