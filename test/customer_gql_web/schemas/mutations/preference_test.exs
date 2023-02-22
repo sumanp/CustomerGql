@@ -29,7 +29,7 @@ defmodule CustomerGqlWeb.Schemas.Mutations.PreferenceTest do
                  }
                })
 
-      assert {:ok, %{data: data}} =
+      assert {:ok, %{data: _data}} =
                Absinthe.run(@update_preference_doc, Schema,
                  variables: %{
                    "user_id" => user.id,

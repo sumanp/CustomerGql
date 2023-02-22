@@ -4,7 +4,17 @@ defmodule CustomerGql.Application do
   @moduledoc false
 
   use Application
-  @events [:create_user, :update_user, :get_user, :users, :update_user_preferences]
+
+  @events [
+    :create_user,
+    :update_user,
+    :get_user,
+    :users,
+    :update_user_preferences,
+    :created_user,
+    :updated_user_preferences,
+    :user
+  ]
 
   @impl true
   def start(_type, _args) do

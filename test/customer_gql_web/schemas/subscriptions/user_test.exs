@@ -2,7 +2,6 @@ defmodule CustomerGqlWeb.Subscriptions.UserTest do
   use CustomerGql.SubscriptionCase
   import Ecto.Query
 
-  alias CustomerGql.Accounts
   alias CustomerGql.Accounts.User
   alias CustomerGql.Repo
 

@@ -64,7 +64,7 @@ defmodule CustomerGqlWeb.Subscriptions.PreferenceTest do
       assert %{
                data: %{
                  "updateUserPreferences" => %{
-                   "id" => pref_id,
+                   "id" => ^pref_id,
                    "user_id" => ^user_id,
                    "likes_emails" => ^updated_likes_emails
                  }
@@ -78,7 +78,7 @@ defmodule CustomerGqlWeb.Subscriptions.PreferenceTest do
                result: %{
                  data: %{
                    "updatedUserPreferences" => %{
-                     "id" => pref_id,
+                     "id" => ^pref_id,
                      "user_id" => ^user_id,
                      "likes_emails" => ^updated_likes_emails
                    }

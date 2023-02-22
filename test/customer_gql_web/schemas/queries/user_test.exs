@@ -181,7 +181,7 @@ defmodule CustomerGqlWeb.Schemas.Queries.UserTest do
                  }
                })
 
-      assert {:ok, user_3} =
+      assert {:ok, _} =
                Accounts.create_user(%{
                  name: "name 3",
                  email: "name3@email.com",

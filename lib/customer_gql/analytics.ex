@@ -11,12 +11,16 @@ defmodule CustomerGql.Analytics do
     GenServer.start_link(CustomerGql.Analytics, state, opts)
   end
 
-  def get_event_counter(event) do
-    GenServer.call(@server_name, {:get_event_counter, event})
+  def get_event_counter(event, server \\ @server_name) do
+    GenServer.call(server, {:get_event_counter, event})
   end
 
-  def register_hit(event) do
-    GenServer.cast(@server_name, {:register_hit, event})
+  def register_hit(event, server \\ @server_name) do
+    GenServer.cast(server, {:register_hit, event})
+  end
+
+  def terminate(reason, state) do
+    state
   end
 
   # Server Callbacks
@@ -35,5 +39,9 @@ defmodule CustomerGql.Analytics do
 
   def handle_info(_, state) do
     {:noreply, state}
+  end
+
+  def handle_info({:EXIT, _from, reason}, state) do
+    {:stop, reason, state}
   end
 end

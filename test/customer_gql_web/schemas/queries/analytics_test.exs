@@ -2,8 +2,6 @@ defmodule CustomerGqlWeb.Schemas.Queries.AnalyticsTest do
   use CustomerGql.DataCase, async: true
 
   alias CustomerGqlWeb.Schema
-  alias CustomerGql.Accounts
-  alias CustomerGql.Accounts.User
 
   @resolver_hits_doc """
   query ResolverHits($key: String!) {
@@ -28,6 +26,22 @@ defmodule CustomerGqlWeb.Schemas.Queries.AnalyticsTest do
     }
   }
   """
+
+  setup do
+    events = [
+      :create_user,
+      :update_user,
+      :get_user,
+      :users,
+      :update_user_preferences,
+      :created_user,
+      :updated_user_preferences,
+      :user
+    ]
+
+    {:ok, pid} = CustomerGql.Analytics.start_link(events, name: nil)
+    %{pid: pid}
+  end
 
   describe "@hits" do
     test "hit count is 0 for unrequested endpoint" do
