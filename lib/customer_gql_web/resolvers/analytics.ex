@@ -2,6 +2,9 @@ defmodule CustomerGqlWeb.Resolvers.Analytics do
   alias CustomerGql.Accounts
 
   def find(%{key: key}, _) do
-    Accounts.find_resolver_hit(%{key: key})
+    event = String.to_existing_atom(key)
+    counter = CustomerGql.Analytics.get_event_counter(event)
+
+    {:ok, %{key: event, count: counter}}
   end
 end

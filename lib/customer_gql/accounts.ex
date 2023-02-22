@@ -5,21 +5,11 @@ defmodule CustomerGql.Accounts do
   import Ecto.Query
 
   def list_users(params \\ %{}) do
-    Actions.all(
-      User.filter_by_preference(Map.get(params, :preferences, %{})),
-      Map.put(params, :preload, [:preference])
-    )
+    Actions.all(User.filter_by_preference(Map.get(params, :preferences, %{})), params)
   end
 
   def find_user(params) do
     Actions.find(User, params)
-  end
-
-  def find_resolver_hit(params) do
-    event = String.to_existing_atom(params[:key])
-    counter = CustomerGql.Analytics.get_event_counter(event)
-
-    {:ok, %{key: event, count: counter}}
   end
 
   def update_user(id, params) do
